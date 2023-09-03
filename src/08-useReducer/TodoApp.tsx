@@ -2,13 +2,19 @@ import { TodoList, TodoAdd } from '../08-useReducer';
 import { useTodos } from '../hooks';
 
 export const TodoApp = () => {
-  const { handleDeleteTodo, handleNewTodo, handleToggleTodo, todos } =
-    useTodos();
+  const {
+    handleDeleteTodo,
+    handleNewTodo,
+    handleToggleTodo,
+    todos,
+    pendingTodosCount,
+    todosCount,
+  } = useTodos();
 
   return (
     <>
       <h1>
-        Todo App 10, <small>pendientes: 2</small>
+        TodoApp: {todosCount} <small>pendientes: {pendingTodosCount}</small>
       </h1>
       <hr />
 
