@@ -23,6 +23,7 @@ export const TodoItem = ({
           done ? 'text-decoration-line-through' : ''
         }`}
         onClick={() => onToggleTodo(id)}
+        aria-label="span"
       >
         {description}
       </span>
