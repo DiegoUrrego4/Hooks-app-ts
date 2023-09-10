@@ -1,5 +1,5 @@
 import { useLayoutEffect, useRef, useState } from 'react';
-import './styles.css';
+// import './styles.css';
 
 interface Props {
   imageUrl: string;
@@ -7,7 +7,7 @@ interface Props {
   status: string;
 }
 
-export const Card = ({ imageUrl, name, status }: Props) => {
+export const Card = ({ imageUrl = '', name, status }: Props) => {
   const pRef = useRef({} as HTMLImageElement | null);
   const [boxSize, setBoxSize] = useState({ width: 0, height: 0 });
 
@@ -26,7 +26,7 @@ export const Card = ({ imageUrl, name, status }: Props) => {
             <div className="col-md-4">
               <img
                 ref={pRef}
-                src={imageUrl}
+                src={imageUrl ?? ''}
                 className="img-fluid rounded-start"
                 alt={name}
               />

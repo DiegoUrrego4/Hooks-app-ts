@@ -1,17 +1,23 @@
 import { FetchResponse, useFetch, useCounter } from '../hooks';
 import { Card, LoadingQuote } from './';
-import './styles.css';
+// import './styles.css';
+
+const isFetchResponse = (obj: unknown): obj is FetchResponse => {
+  return (
+    typeof obj === 'object' &&
+    obj !== null &&
+    'image' in obj &&
+    'name' in obj &&
+    'status' in obj
+  );
+};
 
 export const MultipleCustomHooks = () => {
   const { counter, increment, decrement } = useCounter(1);
 
-  const { data, hasError, isLoading } = useFetch(
+  const { data, isLoading } = useFetch(
     `https://rickandmortyapi.com/api/character/${counter}`
   );
-
-  if (!data) return;
-
-  const { image, name, status } = data as FetchResponse;
 
   return (
     <>
@@ -21,7 +27,9 @@ export const MultipleCustomHooks = () => {
       {isLoading ? (
         <LoadingQuote />
       ) : (
-        <Card imageUrl={image} name={name} status={status} />
+        isFetchResponse(data) && (
+          <Card imageUrl={data.image} name={data.name} status={data.status} />
+        )
       )}
 
       {counter > 1 && (
